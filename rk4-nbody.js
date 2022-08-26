@@ -56,7 +56,7 @@ let vecdiffNew = function(v1,v2){
 };
 
 let magn = function(v){
-    let s = 0:
+    let s = 0;
     for(let i = 0; i < D; i++){
         s += v[i]*v[i];
     }
@@ -71,9 +71,10 @@ let magn = function(v){
 
 
 class Body{
-    constructor(v,dv){
-        this.v = v;
-        this.dv = dv;
+    constructor(obj){
+        for(let key in obj){
+            this[key] = obj[key];
+        }
         this.v_rk4 = newmat(4,D);
         this.dv_rk4 = newmat(4,D);
         this.ddv_rk4 = newmat(4,D);
@@ -86,6 +87,8 @@ class Body{
 
 
 let solveRK4 = function(bodies,dt){
+    //console.log(dt);
+    //console.log(bodies);
     let dt2 = dt/2;
     calculateK1(bodies);
     calculateK2(bodies,dt2);
